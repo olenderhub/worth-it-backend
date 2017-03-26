@@ -17,6 +17,7 @@ defmodule WorthIt.User do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @required_fields)
+    |> validate_required([:email, :password])
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 5)
     |> unique_constraint(:email, message: "Email already taken")
